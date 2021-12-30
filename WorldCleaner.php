@@ -2,11 +2,9 @@
 
 /* 
  * Minecraft World's regions cleaner - CLI
+ * https://github.com/cxxi/WorldCleaner
  * Licence MIT 2021
  * by cxxi
- *
- * Run: php WorldCleaner.php
- * Tips: Place this file directly in your region folder of your minecraft world
  */
 
 class WorldCleaner
