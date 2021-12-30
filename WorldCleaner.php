@@ -57,8 +57,8 @@ class WorldCleaner
 
 					echo self::ASK_STEP_1;
 					$handle = fopen ("php://stdin","r");
-					$line = fgets($handle);
-					if (is_dir(trim($line)) && $this->checkDirValidity(trim($line))) {
+					$line = trim(fgets($handle));
+					if (is_dir(trim($line)) && $this->checkDirValidity($line)) {
 						$this->pathRegionsDir = trim($line);
 						echo __class__." have found ".$this->countRegions." regions.\n\n";
 						$successStep = true;
@@ -72,8 +72,9 @@ class WorldCleaner
 
 					echo self::ASK_STEP_2;
 					$handle = fopen ("php://stdin","r");
-					$line = fgets($handle);
-					[$x, $y] = explode($this->separator, trim($line));
+					$line = trim(fgets($handle));
+					if (!preg_match('/^-?[0-9]+\/-?[0-9]+$/', $line)) break;
+					[$x, $y] = explode($this->separator, $line);
 					if (is_int(intval($x)) && is_int(intval($y))) {
 						$this->keepedArea['cornerTopLeft'] = self::convertCoorToRegionCoor($x, $y);
 						echo "CornerTopLeft will be r.".$this->keepedArea['cornerTopLeft'][0].".".$this->keepedArea['cornerTopLeft'][1].".mca\n\n";
@@ -88,8 +89,9 @@ class WorldCleaner
 
 					echo self::ASK_STEP_3;
 					$handle = fopen ("php://stdin","r");
-					$line = fgets($handle);
-					[$x, $y] = explode($this->separator, trim($line));
+					$line = trim(fgets($handle));
+					if (!preg_match('/^-?[0-9]+\/-?[0-9]+$/', $line)) break;
+					[$x, $y] = explode($this->separator, $line);
 					if (is_int(intval($x)) && is_int(intval($y))) {
 						$this->keepedArea['cornerBottomRight'] = self::convertCoorToRegionCoor($x, $y);
 						echo "CornerBottomRight will be r.".$this->keepedArea['cornerBottomRight'][0].".".$this->keepedArea['cornerBottomRight'][1].".mca\n\n";
@@ -112,8 +114,7 @@ class WorldCleaner
 					echo "KeepedArea :\n".$this->coorToString($this->keepedArea['range'])."\n\n";
 					echo self::ASK_STEP_4;
 					$handle = fopen ("php://stdin","r");
-					$line = fgets($handle);
-					trim($line) == 'yes'
+					trim(fgets($handle)) == 'yes'
 						? $successStep = true
 						: $this->step = 2
 					;
@@ -151,8 +152,7 @@ class WorldCleaner
 					echo "Summary of the action to be performed : (keeped: ".$countKeep.", deleted: ".$countDel.")\n".implode(',', $result)."\n\n";
 					echo self::ASK_STEP_5;
 					$handle = fopen ("php://stdin","r");
-					$line = fgets($handle);
-					trim($line) == 'yes'
+					trim(fgets($handle)) == 'yes'
 						? $successStep = true
 						: $this->step = 2
 					;
