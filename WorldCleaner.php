@@ -225,10 +225,13 @@ class WorldCleaner
 			return $filename != '.' && $filename != '..' && $filename != 'WorldCleaner.php';
 		});
 
-		$regions = array_map(function($region){
+		$regions = [];
+
+		foreach($dirContent as $region)
+		{
 			preg_match('/^r\.(-?[0-9]\.-?[0-9])\.mca$/', $region, $matches);
-			return explode('.', $matches[1]);
-		}, $dirContent);
+			if (empty(!$matches)) $regions[] = explode('.', $matches[1]);
+		}
 
 		return $regions;
 	}
