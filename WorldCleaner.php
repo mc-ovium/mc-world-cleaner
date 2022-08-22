@@ -10,15 +10,15 @@
 class WorldCleaner
 {
 	private const WELCOME_MSG = "*\n* World's regions cleaner - CLI\n* by cxxi\n*\n\n";
-	private const ASK_STEP_1 = "Type the path of regions directory :\n";
+	private const ASK_STEP_1 = "Type the path of regions directory (eg: ./ ) :\n";
 	private const ERR_STEP_1 = "\033[31mInvalid or unknow directory !\033[0m\n";
-	private const ASK_STEP_2 = "Type coordinate (x/z in blocks) of cornerTopLeft for keeped area :\n";
+	private const ASK_STEP_2 = "Type coordinate (x/z in blocks) of cornerTopLeft for keeped area (eg. 500/500):\n";
 	private const ERR_STEP_2 = "\033[31mInvalid coordinate for cornerTopLeft of keeped area !\033[0m\n";
-	private const ASK_STEP_3 = "Type coordinate (x/z in blocks) of cornerBottomRight for keeped area :\n";
+	private const ASK_STEP_3 = "Type coordinate (x/z in blocks) of cornerBottomRight for keeped area (eg. -500/-500):\n";
 	private const ERR_STEP_3 = "\033[31mInvalid coordinate for cornerBottomRight of keeped area !\033[0m\n";
 	private const ASK_STEP_4 = "Confirm regions will be keeped : (yes/no)\n";
 	private const ERR_STEP_4 = "\033[31mKeeped area is empty ! \033[0m\n";
-	private const ASK_STEP_5 = "Confirm regions will be deleted : (yes/no)\n";
+	private const ASK_STEP_5 = "Confirm regions removal : (yes/no)\n";
 	private const ERR_STEP_5 = "\033[31mKeeped area is not included in full area of world !\033[0m\n";
 
 	public function __construct()
@@ -149,7 +149,7 @@ class WorldCleaner
 						}
 					}
 
-					echo "Summary of the action to be performed : (keeped: ".$countKeep.", deleted: ".$countDel.")\n".implode(',', $result)."\n\n";
+					echo "Summary of the action to be performed : (keeped: ".$countKeep.", \033[31mdeleted: ".$countDel."\033[0m\n)\n".implode(',', $result)."\n\n";
 					echo self::ASK_STEP_5;
 					$handle = fopen ("php://stdin","r");
 					trim(fgets($handle)) == 'yes'
