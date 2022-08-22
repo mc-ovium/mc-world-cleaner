@@ -73,7 +73,7 @@ class WorldCleaner
 					echo self::ASK_STEP_2;
 					$handle = fopen ("php://stdin","r");
 					$line = trim(fgets($handle));
-					if (!preg_match('/^-?[0-9]+\/-?[0-9]+$/', $line)) {
+					if (!preg_match('~^-?[0-9]+/-?[0-9]+$~', $line)) {
 						echo self::ERR_STEP_2;
 						break;
 					}
@@ -88,7 +88,7 @@ class WorldCleaner
 					echo self::ASK_STEP_3;
 					$handle = fopen ("php://stdin","r");
 					$line = trim(fgets($handle));
-					if (!preg_match('/^-?[0-9]+\/-?[0-9]+$/', $line)) {
+					if (!preg_match('~^-?[0-9]+/-?[0-9]+$~', $line)) {
 						echo self::ERR_STEP_3;
 						break;
 					}
