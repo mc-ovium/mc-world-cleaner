@@ -233,13 +233,15 @@ class WorldCleaner
 			if (!empty($matches)) $regions[] = explode('.', $matches[1]);
 		}
 
-		return usort($regions, function($a, $b) {
+		usort($regions, function($a, $b) {
 		    if ($a[0] == $b[0]) {
 		    	if ($a[1] == $b[1]) return 0;
 		    	return ($a[1] < $b[1]) ? -1 : 1;
 		    }
 		    return ($a[0] < $b[0]) ? -1 : 1;
 		});
+
+		return $regions;
 	}
 
 	private function getKeepedArea(): array
