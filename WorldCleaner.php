@@ -187,11 +187,11 @@ class WorldCleaner
 		return 1;
 	}
 
-	private static function convertCoorToRegionCoor(int $x, int $y)
+	private static function convertCoorToRegionCoor(int $x, int $z)
 	{
-		$x = $x/512 >= 0 ? ceil($x/512) : floor($x/512);
-		$y = $y/512 >= 0 ? ceil($y/512) : floor($y/512);
-		return [$x == -0 ? 0 : $x, $y == -0 ? 0 : $y];
+		$x = $x/512 >= 0 ? ceil($x/512)-1 : floor($x/512);
+		$z = $z/512 >= 0 ? ceil($z/512)-1 : floor($z/512);
+		return [$x == -0 ? 0 : $x, $z == -0 ? 0 : $z];
 	}
 
 	private function checkDirValidity($path): bool
@@ -246,14 +246,14 @@ class WorldCleaner
 
 	private function getKeepedArea(): array
 	{
-		[$x1, $y1] = $this->keepedArea['cornerTopLeft'];
-		[$x2, $y2] = $this->keepedArea['cornerBottomRight'];
+		[$x1, $z1] = $this->keepedArea['cornerTopLeft'];
+		[$x2, $z2] = $this->keepedArea['cornerBottomRight'];
 		$toKeep = [];
 
 		foreach (range($x1, $x2) as $x) {
-			foreach (range($y1, $y2) as $y) {
-				$toKeep[] = [intval($x), intval($y)];
-			}	
+			foreach (range($z1, $z2) as $z) {
+				$toKeep[] = [intval($x), intval($z)];
+			}
 		}
 
 		return $toKeep;
