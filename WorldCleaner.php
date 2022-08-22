@@ -230,7 +230,7 @@ class WorldCleaner
 		foreach($dirContent as $region)
 		{
 			preg_match('/^r\.(-?[0-9]\.-?[0-9])\.mca$/', $region, $matches);
-			if (empty(!$matches)) $regions[] = explode('.', $matches[1]);
+			if (!empty($matches)) $regions[] = explode('.', $matches[1]);
 		}
 
 		return $regions;
