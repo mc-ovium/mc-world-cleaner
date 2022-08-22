@@ -73,16 +73,14 @@ class WorldCleaner
 					echo self::ASK_STEP_2;
 					$handle = fopen ("php://stdin","r");
 					$line = trim(fgets($handle));
-					if (!preg_match('/^-?[0-9]+\/-?[0-9]+$/', $line)) break;
-					[$x, $y] = explode($this->separator, $line);
-					if (is_int(intval($x)) && is_int(intval($y))) {
-						$this->keepedArea['cornerTopLeft'] = self::convertCoorToRegionCoor($x, $y);
-						echo "CornerTopLeft will be r.".$this->keepedArea['cornerTopLeft'][0].".".$this->keepedArea['cornerTopLeft'][1].".mca\n\n";
-						$successStep = true;
-					} else {
+					if (!preg_match('/^-?[0-9]+\/-?[0-9]+$/', $line)) {
 						echo self::ERR_STEP_2;
+						break;
 					}
-
+					[$x, $y] = explode($this->separator, $line);
+					$this->keepedArea['cornerTopLeft'] = self::convertCoorToRegionCoor($x, $y);
+					echo "CornerTopLeft will be r.".$this->keepedArea['cornerTopLeft'][0].".".$this->keepedArea['cornerTopLeft'][1].".mca\n\n";
+					$successStep = true;
 					break;
 
 				case 3:
@@ -90,16 +88,14 @@ class WorldCleaner
 					echo self::ASK_STEP_3;
 					$handle = fopen ("php://stdin","r");
 					$line = trim(fgets($handle));
-					if (!preg_match('/^-?[0-9]+\/-?[0-9]+$/', $line)) break;
-					[$x, $y] = explode($this->separator, $line);
-					if (is_int(intval($x)) && is_int(intval($y))) {
-						$this->keepedArea['cornerBottomRight'] = self::convertCoorToRegionCoor($x, $y);
-						echo "CornerBottomRight will be r.".$this->keepedArea['cornerBottomRight'][0].".".$this->keepedArea['cornerBottomRight'][1].".mca\n\n";
-						$successStep = true;
-					} else {
+					if (!preg_match('/^-?[0-9]+\/-?[0-9]+$/', $line)) {
 						echo self::ERR_STEP_3;
+						break;
 					}
-
+					[$x, $y] = explode($this->separator, $line);
+					$this->keepedArea['cornerBottomRight'] = self::convertCoorToRegionCoor($x, $y);
+					echo "CornerBottomRight will be r.".$this->keepedArea['cornerBottomRight'][0].".".$this->keepedArea['cornerBottomRight'][1].".mca\n\n";
+					$successStep = true;
 					break;
 
 				case 4:
